@@ -1,5 +1,5 @@
 {
-  "name": "larax",
+  "name": "laraxios",
   "version": "0.1.0",
   "description": "Axios wrapper for Laravel API",
   "source": "src/laraxios.ts",

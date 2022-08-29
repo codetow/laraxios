@@ -18,6 +18,12 @@
   },
   "author": "Nenad Novkovic <shonetow@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "axios",
+    "laravel",
+    "api",
+    "ajax"
+  ],
   "scripts": {
     "watch": "parcel watch",
     "clean": "rimraf dist/*",

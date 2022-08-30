@@ -22,14 +22,12 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
    * POST Request.
    * @param url
    * @param data
-   * @param params
    * @param config
    */
-  post (url: string, data?: RequestData, params?: object, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
+  post (url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
     return laraxiosRequest({
       url,
       data,
-      params,
       method: 'post',
       ...{ ...configuration, ...config }
     })
@@ -38,14 +36,12 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
    * PUT Request.
    * @param url
    * @param data
-   * @param params
    * @param config
    */
-  put (url: string, data?: RequestData, params?: object, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
+  put (url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
     return laraxiosRequest({
       url,
       data,
-      params,
       method: 'put',
       ...{ ...configuration, ...config }
     })
@@ -54,19 +50,16 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
    * PATCH Request.
    * @param url
    * @param data
-   * @param params
    * @param config
    */
   patch (
     url: string,
     data?: RequestData,
-    params?: object,
     config?: LaraxiosRequestConfig
   ): Promise<ApiResponse> {
     return laraxiosRequest({
       url,
       data,
-      params,
       method: 'patch',
       ...{ ...configuration, ...config }
     })
@@ -74,13 +67,11 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
   /**
    * DELETE Request.
    * @param url
-   * @param params
    * @param config
    */
-  delete (url: string, params?: object, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
+  delete (url: string, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
     return laraxiosRequest({
       url,
-      params,
       method: 'delete',
       ...{ ...configuration, ...config }
     })

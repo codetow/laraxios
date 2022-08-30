@@ -1,27 +1,57 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosError, AxiosRequestConfig } from "axios";
 interface LaraxiosRequestConfig extends AxiosRequestConfig {
     errorHandler?: undefined | ErrorHandlerCallback;
-}
-interface LaraxiosInstance {
-    request: (config?: LaraxiosRequestConfig) => Promise<ApiResponse>;
-    get: (url: string, config?: LaraxiosRequestConfig) => Promise<ApiResponse>;
-    post: (url: string, data?: RequestData, config?: LaraxiosRequestConfig) => Promise<ApiResponse>;
-    put: (url: string, data?: RequestData, config?: LaraxiosRequestConfig) => Promise<ApiResponse>;
-    patch: (url: string, data?: RequestData, config?: LaraxiosRequestConfig) => Promise<ApiResponse>;
-    delete: (url: string, data?: RequestData, config?: LaraxiosRequestConfig) => Promise<ApiResponse>;
-    sanctum: {
-        csrf: (url?: string) => Promise<ApiResponse> | void;
-    };
 }
 type RequestDataValue = Array<number | string | boolean | Blob> | string | number | boolean | Blob;
 type RequestData = {
     [key: string]: RequestDataValue;
 };
-type ApiResponse = AxiosResponse;
 interface ErrorHandlerCallback {
     (error: AxiosError): void;
 }
-declare const _default: (configuration?: LaraxiosRequestConfig) => LaraxiosInstance;
+declare const _default: (configuration?: LaraxiosRequestConfig) => {
+    request(config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    /**
+     * GET Request.
+     * @param url
+     * @param config
+     */
+    get(url: string, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    /**
+     * POST Request.
+     * @param url
+     * @param data
+     * @param config
+     */
+    post(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    /**
+     * PUT Request.
+     * @param url
+     * @param data
+     * @param config
+     */
+    put(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    /**
+     * PATCH Request.
+     * @param url
+     * @param data
+     * @param config
+     */
+    patch(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    /**
+     * DELETE Request.
+     * @param url
+     * @param config
+     */
+    delete(url: string, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    sanctum: {
+        /**
+         * Send /sanctum/csrf request.
+         * @param url
+         */
+        csrf(url?: string): Promise<import("axios").AxiosResponse<any, any>>;
+    };
+};
 export default _default;
 
 //# sourceMappingURL=types.d.ts.map

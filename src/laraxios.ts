@@ -1,8 +1,7 @@
-import { ApiResponse, LaraxiosInstance, LaraxiosRequestConfig, RequestData } from './types'
+import { LaraxiosRequestConfig, RequestData } from './types'
 import laraxiosRequest from './request'
-import { AxiosResponse } from 'axios'
 
-export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
+export default (configuration?: LaraxiosRequestConfig) => ({
   request (config?: LaraxiosRequestConfig) {
     return laraxiosRequest({ ...configuration, ...config })
   },
@@ -11,7 +10,7 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
    * @param url
    * @param config
    */
-  get (url: string, config?: LaraxiosRequestConfig): Promise<AxiosResponse> {
+  get (url: string, config?: LaraxiosRequestConfig) {
     return laraxiosRequest({
       url,
       method: 'get',
@@ -24,7 +23,7 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
    * @param data
    * @param config
    */
-  post (url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
+  post (url: string, data?: RequestData, config?: LaraxiosRequestConfig) {
     return laraxiosRequest({
       url,
       data,
@@ -38,7 +37,7 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
    * @param data
    * @param config
    */
-  put (url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
+  put (url: string, data?: RequestData, config?: LaraxiosRequestConfig) {
     return laraxiosRequest({
       url,
       data,
@@ -56,7 +55,7 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
     url: string,
     data?: RequestData,
     config?: LaraxiosRequestConfig
-  ): Promise<ApiResponse> {
+  ) {
     return laraxiosRequest({
       url,
       data,
@@ -69,7 +68,7 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
    * @param url
    * @param config
    */
-  delete (url: string, config?: LaraxiosRequestConfig): Promise<ApiResponse> {
+  delete (url: string, config?: LaraxiosRequestConfig) {
     return laraxiosRequest({
       url,
       method: 'delete',
@@ -81,7 +80,7 @@ export default (configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
      * Send /sanctum/csrf request.
      * @param url
      */
-    csrf (url?: string): Promise<ApiResponse> | void {
+    csrf (url?: string) {
       if (url) {
         return laraxiosRequest({ ...configuration, baseURL: '', url })
       }

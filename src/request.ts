@@ -1,5 +1,5 @@
-import { LaraxiosRequestConfig } from './types'
-import axios from 'axios'
+import { LaraxiosRequestConfig, LaraxiosResponse } from './types'
+import axios  from 'axios'
 import { mergeConfig, requestFormatter } from './utils'
 import axiosInstance from './axios-instance'
 
@@ -7,7 +7,7 @@ import axiosInstance from './axios-instance'
  * Base request.
  * @param config
  */
-const request = async (config: LaraxiosRequestConfig) => {
+const request = async (config: LaraxiosRequestConfig): Promise<LaraxiosResponse> => {
   const c = mergeConfig(config)
 
   // Get the error handler and then remove it from the config...

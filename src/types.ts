@@ -1,8 +1,10 @@
-import { AxiosError, AxiosRequestConfig } from 'axios'
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 export interface LaraxiosRequestConfig extends AxiosRequestConfig {
   errorHandler?: undefined | ErrorHandlerCallback
 }
+
+export type LaraxiosResponse = AxiosResponse | undefined
 
 export type RequestDataValue =
   Array<number | string | boolean | Blob>

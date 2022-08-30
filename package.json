@@ -18,6 +18,14 @@
   },
   "author": "Nenad Novkovic <shonetow@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codetow/laraxios.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codetow/laraxios/issues"
+  },
+  "homepage": "https://github.com/codetow/laraxios.git",
   "keywords": [
     "axios",
     "laravel",

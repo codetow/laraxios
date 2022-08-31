@@ -2,6 +2,6 @@
 jest.config.js
 .idea
 .parcel-cache
-dist
-LICENSE
-README.md
+src
+test
+tsconfig.json

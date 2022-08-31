@@ -22,5 +22,5 @@ export enum LaravelMethod {
 }
 
 export interface ErrorHandlerCallback {
-  (error: AxiosError): void
+  (error: AxiosError<any>): void
 }

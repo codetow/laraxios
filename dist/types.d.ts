@@ -7,7 +7,7 @@ type RequestData = {
     [key: string]: RequestDataValue;
 };
 interface ErrorHandlerCallback {
-    (error: AxiosError): void;
+    (error: AxiosError<any>): void;
 }
 declare const _default: (configuration?: LaraxiosRequestConfig) => {
     request(config?: LaraxiosRequestConfig): Promise<import("types").LaraxiosResponse<any, any>>;

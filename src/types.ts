@@ -4,7 +4,7 @@ export interface LaraxiosRequestConfig extends AxiosRequestConfig {
   errorHandler?: undefined | ErrorHandlerCallback
 }
 
-export type LaraxiosResponse = AxiosResponse | undefined
+export interface LaraxiosResponse<T = any, D = any> extends AxiosResponse {}
 
 export type RequestDataValue =
   Array<number | string | boolean | Blob>

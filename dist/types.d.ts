@@ -10,46 +10,46 @@ interface ErrorHandlerCallback {
     (error: AxiosError): void;
 }
 declare const _default: (configuration?: LaraxiosRequestConfig) => {
-    request(config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    request(config?: LaraxiosRequestConfig): Promise<import("types").LaraxiosResponse<any, any>>;
     /**
      * GET Request.
      * @param url
      * @param config
      */
-    get(url: string, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    get(url: string, config?: LaraxiosRequestConfig): Promise<import("types").LaraxiosResponse<any, any>>;
     /**
      * POST Request.
      * @param url
      * @param data
      * @param config
      */
-    post(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    post(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("types").LaraxiosResponse<any, any>>;
     /**
      * PUT Request.
      * @param url
      * @param data
      * @param config
      */
-    put(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    put(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("types").LaraxiosResponse<any, any>>;
     /**
      * PATCH Request.
      * @param url
      * @param data
      * @param config
      */
-    patch(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    patch(url: string, data?: RequestData, config?: LaraxiosRequestConfig): Promise<import("types").LaraxiosResponse<any, any>>;
     /**
      * DELETE Request.
      * @param url
      * @param config
      */
-    delete(url: string, config?: LaraxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    delete(url: string, config?: LaraxiosRequestConfig): Promise<import("types").LaraxiosResponse<any, any>>;
     sanctum: {
         /**
          * Send /sanctum/csrf request.
          * @param url
          */
-        csrf(url?: string): Promise<import("axios").AxiosResponse<any, any>>;
+        csrf(url?: string): Promise<import("types").LaraxiosResponse<any, any>>;
     };
 };
 export default _default;

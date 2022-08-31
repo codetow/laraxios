@@ -1,6 +1,6 @@
 {
   "name": "laraxios",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Axios wrapper for Laravel API",
   "source": "src/laraxios.ts",
   "main": "dist/laraxios.js",

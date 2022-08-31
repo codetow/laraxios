@@ -1,5 +1,5 @@
 import { LaraxiosRequestConfig, LaraxiosResponse } from './types'
-import axios  from 'axios'
+import axios from 'axios'
 import { mergeConfig, requestFormatter } from './utils'
 import axiosInstance from './axios-instance'
 

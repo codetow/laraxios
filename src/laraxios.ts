@@ -1,5 +1,8 @@
 import { LaraxiosRequestConfig, RequestData } from './types'
 import laraxiosRequest from './request'
+import ax from './axios-instance'
+
+export const axiosInstance = ax
 
 export default (configuration?: LaraxiosRequestConfig) => ({
   request (config?: LaraxiosRequestConfig) {

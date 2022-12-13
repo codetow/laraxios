@@ -8,12 +8,11 @@
   "types": "dist/types.d.ts",
   "targets": {
     "main": {
-      "isLibrary": true,
-      "optimize": true
+      "isLibrary": true
     },
     "module": {
       "isLibrary": true,
-      "optimize": true
+      "outputFormat": "esmodule"
     }
   },
   "author": "Nenad Novkovic <shonetow@gmail.com>",
@@ -34,8 +33,9 @@
   ],
   "scripts": {
     "watch": "parcel watch",
-    "clean": "rimraf dist/*",
-    "build": "yarn clean && parcel build"
+    "clean": "npx rimraf dist/*",
+    "build": "parcel build",
+    "cbuild": "yarn clean && parcel build"
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.8.1",

@@ -24,7 +24,7 @@ describe('Request Test', () => {
       method: 'put',
     }
 
-    await request(mockedAxiosInstance, options)
+    await request(axios, mockedAxiosInstance, options)
     const data = new FormData()
     data.append('_method', 'put')
     expect(mockedAxiosInstance.request)
@@ -63,7 +63,7 @@ describe('Request Test', () => {
     }
     mockedAxiosInstance.request.mockRejectedValueOnce(error)
 
-    const errorResponse = await request(mockedAxiosInstance, options)
+    const errorResponse = await request(axios, mockedAxiosInstance, options)
 
     expect(errorResponse)
       .toEqual(error.response)
@@ -85,7 +85,7 @@ describe('Request Test', () => {
     mockedAxiosInstance.request.mockRejectedValueOnce(error)
 
     try {
-      await request(mockedAxiosInstance, options)
+      await request(axios, mockedAxiosInstance, options)
     } catch (e) {
       expect(mockedErrorHandler)
         .not

@@ -1,6 +1,11 @@
 import request from '../src/request'
 import axios, { AxiosError, Method } from 'axios'
-import axiosInstance from '../src/axios-instance'
+const axiosInstance = axios.create({
+  withCredentials: true,
+  headers: {
+    Accept: 'application/json'
+  }
+})
 
 axiosInstance.request = jest.fn()
 
@@ -19,7 +24,7 @@ describe('Request Test', () => {
       method: 'put',
     }
 
-    await request(options)
+    await request(mockedAxiosInstance, options)
     const data = new FormData()
     data.append('_method', 'put')
     expect(mockedAxiosInstance.request)
@@ -58,7 +63,7 @@ describe('Request Test', () => {
     }
     mockedAxiosInstance.request.mockRejectedValueOnce(error)
 
-    const errorResponse = await request(options)
+    const errorResponse = await request(mockedAxiosInstance, options)
 
     expect(errorResponse)
       .toEqual(error.response)
@@ -80,7 +85,7 @@ describe('Request Test', () => {
     mockedAxiosInstance.request.mockRejectedValueOnce(error)
 
     try {
-      await request(options)
+      await request(mockedAxiosInstance, options)
     } catch (e) {
       expect(mockedErrorHandler)
         .not

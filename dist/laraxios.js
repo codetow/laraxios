@@ -1,2 +1,210 @@
-var e,t=require("axios");function r(e,t,r,o){Object.defineProperty(e,t,{get:r,set:o,enumerable:!0,configurable:!0})}function o(e){return e&&e.__esModule?e.default:e}let a;var s;e=module.exports,Object.defineProperty(e,"__esModule",{value:!0,configurable:!0}),r(module.exports,"axiosInstance",(()=>c)),r(module.exports,"default",(()=>p)),(s=a||(a={})).GET="get",s.POST="post",s.DELETE="delete";const n=e=>{let t={},r=a.GET;if("post"===e.method||"put"===e.method||"patch"===e.method){const o=(e=>{const t=e=>e instanceof Blob?e:"boolean"==typeof e?e?"1":"0":`${e}`,r=new FormData;return e&&Object.entries(e).forEach((([e,o])=>{Array.isArray(o)?o.forEach(((o,a)=>{r.append(`${e}[${a}]`,t(o))})):r.append(e,t(o))})),r})(e.data);o.append("_method",e.method),t=o,r=a.POST}else"delete"===e.method&&(t={},r=a.DELETE);const o={...e,method:r,params:e.params||{},data:t};return o.baseURL&&(o.baseURL=(e=>{const t=e.baseURL?.trim();if(t?.length&&e.url&&"/"===e.url[0]){const{origin:e}=new URL(t);return`${e}`}return e.baseURL})(e)),o},d=e=>({errorHandler:e=>console.error("LARAVEL API ERROR: "+(e?.response?.statusText||"Unknown")),...e});var l=o(t).create({withCredentials:!0,headers:{Accept:"application/json"}});var u=async e=>{const r=d(e),a=r.errorHandler;delete r.errorHandler;try{return await l.request(n(r))}catch(e){return o(t).isAxiosError(e)&&e.response&&a?(a(e),Promise.resolve(e.response)):Promise.reject(e)}};const c=l;var p=e=>({request:t=>u({...e,...t}),get:(t,r)=>u({url:t,method:"get",...{...e,...r}}),post:(t,r,o)=>u({url:t,data:r,method:"post",...{...e,...o}}),put:(t,r,o)=>u({url:t,data:r,method:"put",...{...e,...o}}),patch:(t,r,o)=>u({url:t,data:r,method:"patch",...{...e,...o}}),delete:(t,r)=>u({url:t,method:"delete",...{...e,...r}}),sanctum:{csrf:t=>t?u({...e,baseURL:"",url:t}):e?.baseURL?u({...e,url:"/sanctum/csrf-cookie"}):void 0}});
+function $parcel$defineInteropFlag(a) {
+  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
+}
+function $parcel$export(e, n, v, s) {
+  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
+}
+
+$parcel$defineInteropFlag(module.exports);
+
+$parcel$export(module.exports, "default", () => $19cba8869f611cea$export$2e2bcd8739ae039);
+let $faefaad95e5fcca0$export$440ca1817514db88;
+(function(LaravelMethod) {
+    LaravelMethod["GET"] = "get";
+    LaravelMethod["POST"] = "post";
+    LaravelMethod["DELETE"] = "delete";
+})($faefaad95e5fcca0$export$440ca1817514db88 || ($faefaad95e5fcca0$export$440ca1817514db88 = {}));
+
+
+const $9ba0f9a5c47c04f2$export$b1ef46223b559f9d = (config)=>{
+    const baseURL = config.baseURL?.trim();
+    if (baseURL?.length && config.url && config.url[0] === "/") {
+        const { origin: origin  } = new URL(baseURL);
+        return `${origin}`;
+    }
+    return config.baseURL;
+};
+const $9ba0f9a5c47c04f2$export$697572e6b3df3226 = (data)=>{
+    /**
+   * Change the type of data.
+   * @param val
+   */ const changeType = (val)=>{
+        if (val instanceof Blob) return val;
+        else if (typeof val === "boolean") return val ? "1" : "0";
+        else return `${val}`;
+    };
+    const formData = new FormData();
+    if (data) Object.entries(data).forEach(([key, value])=>{
+        // Iterate if array
+        if (Array.isArray(value)) value.forEach((val, index)=>{
+            formData.append(`${key}[${index}]`, changeType(val));
+        });
+        else formData.append(key, changeType(value));
+    });
+    return formData;
+};
+const $9ba0f9a5c47c04f2$export$425a08012e9acdfa = (config)=>{
+    let data = {};
+    let method = (0, $faefaad95e5fcca0$export$440ca1817514db88).GET;
+    // Set data according to the method...
+    if (config.method === "post" || config.method === "put" || config.method === "patch") {
+        const formData = $9ba0f9a5c47c04f2$export$697572e6b3df3226(config.data);
+        // Laravel uses this field to recognize put and patch...
+        formData.append("_method", config.method);
+        data = formData;
+        method = (0, $faefaad95e5fcca0$export$440ca1817514db88).POST;
+    } else if (config.method === "delete") {
+        data = {};
+        method = (0, $faefaad95e5fcca0$export$440ca1817514db88).DELETE;
+    }
+    const newConfig = {
+        ...config,
+        method: method,
+        params: config.params || {},
+        data: data
+    };
+    if (newConfig.baseURL) newConfig.baseURL = $9ba0f9a5c47c04f2$export$b1ef46223b559f9d(config);
+    return newConfig;
+};
+const $9ba0f9a5c47c04f2$export$7ec1ebcfa9d8bd6a = (config)=>{
+    return {
+        errorHandler: (error)=>console.error("LARAVEL API ERROR: " + (error?.response?.statusText || "Unknown")),
+        ...config
+    };
+};
+
+
+/**
+ * Base request.
+ * @param axios
+ * @param axiosInstance
+ * @param config
+ */ const $b316306660403ad7$var$request = async (axios, axiosInstance, config)=>{
+    const c = (0, $9ba0f9a5c47c04f2$export$7ec1ebcfa9d8bd6a)(config);
+    // Get the error handler and then remove it from the config...
+    const errorHandler = c.errorHandler;
+    delete c.errorHandler;
+    try {
+        return await axiosInstance.request((0, $9ba0f9a5c47c04f2$export$425a08012e9acdfa)(c));
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response && errorHandler) {
+            // Invoke error handler...
+            errorHandler(error);
+            // Resolve with error, since the error has been handled...
+            return Promise.resolve(error.response);
+        }
+        return Promise.reject(error);
+    }
+};
+var $b316306660403ad7$export$2e2bcd8739ae039 = $b316306660403ad7$var$request;
+
+
+var $19cba8869f611cea$export$2e2bcd8739ae039 = (axios, configuration)=>({
+        axiosInstance: axios.create({
+            withCredentials: true,
+            headers: {
+                Accept: "application/json"
+            }
+        }),
+        request (config) {
+            return (0, $b316306660403ad7$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                ...configuration,
+                ...config
+            });
+        },
+        /**
+   * GET Request.
+   * @param url
+   * @param config
+   */ get (url, config) {
+            return (0, $b316306660403ad7$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                method: "get",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        /**
+   * POST Request.
+   * @param url
+   * @param data
+   * @param config
+   */ post (url, data, config) {
+            return (0, $b316306660403ad7$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                data: data,
+                method: "post",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        /**
+   * PUT Request.
+   * @param url
+   * @param data
+   * @param config
+   */ put (url, data, config) {
+            return (0, $b316306660403ad7$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                data: data,
+                method: "put",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        /**
+   * PATCH Request.
+   * @param url
+   * @param data
+   * @param config
+   */ patch (url, data, config) {
+            return (0, $b316306660403ad7$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                data: data,
+                method: "patch",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        /**
+   * DELETE Request.
+   * @param url
+   * @param config
+   */ delete (url, config) {
+            return (0, $b316306660403ad7$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                method: "delete",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        sanctum: {
+            /**
+     * Send /sanctum/csrf request.
+     * @param url
+     */ csrf (url) {
+                if (url) return (0, $b316306660403ad7$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                    ...configuration,
+                    baseURL: "",
+                    url: url
+                });
+                if (configuration?.baseURL) return (0, $b316306660403ad7$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                    ...configuration,
+                    url: "/sanctum/csrf-cookie"
+                });
+            }
+        }
+    });
+
+
 //# sourceMappingURL=laraxios.js.map

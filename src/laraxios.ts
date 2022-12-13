@@ -10,7 +10,7 @@ export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => ({
     }
   }),
   request (config?: LaraxiosRequestConfig) {
-    return laraxiosRequest(this.axiosInstance, { ...configuration, ...config })
+    return laraxiosRequest(axios, this.axiosInstance, { ...configuration, ...config })
   },
   /**
    * GET Request.
@@ -18,7 +18,7 @@ export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => ({
    * @param config
    */
   get (url: string, config?: LaraxiosRequestConfig) {
-    return laraxiosRequest(this.axiosInstance, {
+    return laraxiosRequest(axios, this.axiosInstance, {
       url,
       method: 'get',
       ...{ ...configuration, ...config }
@@ -31,7 +31,7 @@ export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => ({
    * @param config
    */
   post (url: string, data?: RequestData, config?: LaraxiosRequestConfig) {
-    return laraxiosRequest(this.axiosInstance, {
+    return laraxiosRequest(axios, this.axiosInstance, {
       url,
       data,
       method: 'post',
@@ -45,7 +45,7 @@ export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => ({
    * @param config
    */
   put (url: string, data?: RequestData, config?: LaraxiosRequestConfig) {
-    return laraxiosRequest(this.axiosInstance, {
+    return laraxiosRequest(axios, this.axiosInstance, {
       url,
       data,
       method: 'put',
@@ -63,7 +63,7 @@ export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => ({
     data?: RequestData,
     config?: LaraxiosRequestConfig
   ) {
-    return laraxiosRequest(this.axiosInstance, {
+    return laraxiosRequest(axios, this.axiosInstance, {
       url,
       data,
       method: 'patch',
@@ -76,7 +76,7 @@ export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => ({
    * @param config
    */
   delete (url: string, config?: LaraxiosRequestConfig) {
-    return laraxiosRequest(this.axiosInstance, {
+    return laraxiosRequest(axios, this.axiosInstance, {
       url,
       method: 'delete',
       ...{ ...configuration, ...config }
@@ -89,10 +89,10 @@ export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => ({
      */
     csrf (url?: string) {
       if (url) {
-        return laraxiosRequest(this.axiosInstance, { ...configuration, baseURL: '', url })
+        return laraxiosRequest(axios, this.axiosInstance, { ...configuration, baseURL: '', url })
       }
       if (configuration?.baseURL) {
-        return laraxiosRequest(this.axiosInstance, { ...configuration, url: '/sanctum/csrf-cookie' })
+        return laraxiosRequest(axios, this.axiosInstance, { ...configuration, url: '/sanctum/csrf-cookie' })
       }
     }
   }

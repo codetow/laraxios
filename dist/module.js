@@ -1,2 +1,201 @@
-import e from"axios";let t;var r;(r=t||(t={})).GET="get",r.POST="post",r.DELETE="delete";const a=e=>{let r={},a=t.GET;if("post"===e.method||"put"===e.method||"patch"===e.method){const o=(e=>{const t=e=>e instanceof Blob?e:"boolean"==typeof e?e?"1":"0":`${e}`,r=new FormData;return e&&Object.entries(e).forEach((([e,a])=>{Array.isArray(a)?a.forEach(((a,o)=>{r.append(`${e}[${o}]`,t(a))})):r.append(e,t(a))})),r})(e.data);o.append("_method",e.method),r=o,a=t.POST}else"delete"===e.method&&(r={},a=t.DELETE);const o={...e,method:a,params:e.params||{},data:r};return o.baseURL&&(o.baseURL=(e=>{const t=e.baseURL?.trim();if(t?.length&&e.url&&"/"===e.url[0]){const{origin:e}=new URL(t);return`${e}`}return e.baseURL})(e)),o},o=e=>({errorHandler:e=>console.error("LARAVEL API ERROR: "+(e?.response?.statusText||"Unknown")),...e});var s=e.create({withCredentials:!0,headers:{Accept:"application/json"}});var n=async t=>{const r=o(t),n=r.errorHandler;delete r.errorHandler;try{return await s.request(a(r))}catch(t){return e.isAxiosError(t)&&t.response&&n?(n(t),Promise.resolve(t.response)):Promise.reject(t)}};const d=s;var c=e=>({request:t=>n({...e,...t}),get:(t,r)=>n({url:t,method:"get",...{...e,...r}}),post:(t,r,a)=>n({url:t,data:r,method:"post",...{...e,...a}}),put:(t,r,a)=>n({url:t,data:r,method:"put",...{...e,...a}}),patch:(t,r,a)=>n({url:t,data:r,method:"patch",...{...e,...a}}),delete:(t,r)=>n({url:t,method:"delete",...{...e,...r}}),sanctum:{csrf:t=>t?n({...e,baseURL:"",url:t}):e?.baseURL?n({...e,url:"/sanctum/csrf-cookie"}):void 0}});export{d as axiosInstance,c as default};
+let $81c1b644006d48ec$export$440ca1817514db88;
+(function(LaravelMethod) {
+    LaravelMethod["GET"] = "get";
+    LaravelMethod["POST"] = "post";
+    LaravelMethod["DELETE"] = "delete";
+})($81c1b644006d48ec$export$440ca1817514db88 || ($81c1b644006d48ec$export$440ca1817514db88 = {}));
+
+
+const $fab42eb3dee39b5b$export$b1ef46223b559f9d = (config)=>{
+    const baseURL = config.baseURL?.trim();
+    if (baseURL?.length && config.url && config.url[0] === "/") {
+        const { origin: origin  } = new URL(baseURL);
+        return `${origin}`;
+    }
+    return config.baseURL;
+};
+const $fab42eb3dee39b5b$export$697572e6b3df3226 = (data)=>{
+    /**
+   * Change the type of data.
+   * @param val
+   */ const changeType = (val)=>{
+        if (val instanceof Blob) return val;
+        else if (typeof val === "boolean") return val ? "1" : "0";
+        else return `${val}`;
+    };
+    const formData = new FormData();
+    if (data) Object.entries(data).forEach(([key, value])=>{
+        // Iterate if array
+        if (Array.isArray(value)) value.forEach((val, index)=>{
+            formData.append(`${key}[${index}]`, changeType(val));
+        });
+        else formData.append(key, changeType(value));
+    });
+    return formData;
+};
+const $fab42eb3dee39b5b$export$425a08012e9acdfa = (config)=>{
+    let data = {};
+    let method = (0, $81c1b644006d48ec$export$440ca1817514db88).GET;
+    // Set data according to the method...
+    if (config.method === "post" || config.method === "put" || config.method === "patch") {
+        const formData = $fab42eb3dee39b5b$export$697572e6b3df3226(config.data);
+        // Laravel uses this field to recognize put and patch...
+        formData.append("_method", config.method);
+        data = formData;
+        method = (0, $81c1b644006d48ec$export$440ca1817514db88).POST;
+    } else if (config.method === "delete") {
+        data = {};
+        method = (0, $81c1b644006d48ec$export$440ca1817514db88).DELETE;
+    }
+    const newConfig = {
+        ...config,
+        method: method,
+        params: config.params || {},
+        data: data
+    };
+    if (newConfig.baseURL) newConfig.baseURL = $fab42eb3dee39b5b$export$b1ef46223b559f9d(config);
+    return newConfig;
+};
+const $fab42eb3dee39b5b$export$7ec1ebcfa9d8bd6a = (config)=>{
+    return {
+        errorHandler: (error)=>console.error("LARAVEL API ERROR: " + (error?.response?.statusText || "Unknown")),
+        ...config
+    };
+};
+
+
+/**
+ * Base request.
+ * @param axios
+ * @param axiosInstance
+ * @param config
+ */ const $62208318282b33db$var$request = async (axios, axiosInstance, config)=>{
+    const c = (0, $fab42eb3dee39b5b$export$7ec1ebcfa9d8bd6a)(config);
+    // Get the error handler and then remove it from the config...
+    const errorHandler = c.errorHandler;
+    delete c.errorHandler;
+    try {
+        return await axiosInstance.request((0, $fab42eb3dee39b5b$export$425a08012e9acdfa)(c));
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response && errorHandler) {
+            // Invoke error handler...
+            errorHandler(error);
+            // Resolve with error, since the error has been handled...
+            return Promise.resolve(error.response);
+        }
+        return Promise.reject(error);
+    }
+};
+var $62208318282b33db$export$2e2bcd8739ae039 = $62208318282b33db$var$request;
+
+
+var $5c801b1e53b88a5f$export$2e2bcd8739ae039 = (axios, configuration)=>({
+        axiosInstance: axios.create({
+            withCredentials: true,
+            headers: {
+                Accept: "application/json"
+            }
+        }),
+        request (config) {
+            return (0, $62208318282b33db$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                ...configuration,
+                ...config
+            });
+        },
+        /**
+   * GET Request.
+   * @param url
+   * @param config
+   */ get (url, config) {
+            return (0, $62208318282b33db$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                method: "get",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        /**
+   * POST Request.
+   * @param url
+   * @param data
+   * @param config
+   */ post (url, data, config) {
+            return (0, $62208318282b33db$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                data: data,
+                method: "post",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        /**
+   * PUT Request.
+   * @param url
+   * @param data
+   * @param config
+   */ put (url, data, config) {
+            return (0, $62208318282b33db$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                data: data,
+                method: "put",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        /**
+   * PATCH Request.
+   * @param url
+   * @param data
+   * @param config
+   */ patch (url, data, config) {
+            return (0, $62208318282b33db$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                data: data,
+                method: "patch",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        /**
+   * DELETE Request.
+   * @param url
+   * @param config
+   */ delete (url, config) {
+            return (0, $62208318282b33db$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                url: url,
+                method: "delete",
+                ...{
+                    ...configuration,
+                    ...config
+                }
+            });
+        },
+        sanctum: {
+            /**
+     * Send /sanctum/csrf request.
+     * @param url
+     */ csrf (url) {
+                if (url) return (0, $62208318282b33db$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                    ...configuration,
+                    baseURL: "",
+                    url: url
+                });
+                if (configuration?.baseURL) return (0, $62208318282b33db$export$2e2bcd8739ae039)(axios, this.axiosInstance, {
+                    ...configuration,
+                    url: "/sanctum/csrf-cookie"
+                });
+            }
+        }
+    });
+
+
+export {$5c801b1e53b88a5f$export$2e2bcd8739ae039 as default};
 //# sourceMappingURL=module.js.map

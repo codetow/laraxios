@@ -1,4 +1,4 @@
-import { AxiosError, AxiosRequestConfig } from "axios";
+import { AxiosError, AxiosRequestConfig, AxiosStatic } from "axios";
 interface LaraxiosRequestConfig extends AxiosRequestConfig {
     errorHandler?: undefined | ErrorHandlerCallback;
 }
@@ -9,8 +9,8 @@ type RequestData = {
 interface ErrorHandlerCallback {
     (error: AxiosError<any>): void;
 }
-export const axiosInstance: import("axios").AxiosInstance;
-declare const _default: (configuration?: LaraxiosRequestConfig) => {
+declare const _default: (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => {
+    axiosInstance: import("axios").AxiosInstance;
     request(config?: LaraxiosRequestConfig): Promise<import("types").LaraxiosResponse<any, any>>;
     /**
      * GET Request.

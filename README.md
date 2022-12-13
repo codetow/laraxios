@@ -5,17 +5,18 @@ Work in progress...
 ## Installation
 
 ```shell
-yarn add laraxios
+yarn add axios laraxios
 # or
-npm i laraxios
+npm i axios laraxios
 ```
 
 ## Usage
 
 ```javascript
+import axios from 'axios'
 import laraxios from 'laraxios'
 
-const api = laraxios({
+const api = laraxios(axios, {
   baseURL: 'https://api.example.com/v1'
 })
 

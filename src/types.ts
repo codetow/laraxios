@@ -4,14 +4,15 @@ export interface LaraxiosRequestConfig extends AxiosRequestConfig {
   errorHandler?: undefined | ErrorHandlerCallback
 }
 
-export interface LaraxiosResponse<T = any, D = any> extends AxiosResponse {}
+export interface LaraxiosResponse<T = any, D = any> extends AxiosResponse {
+}
 
 export type RequestDataValue =
-  Array<number | string | boolean | Blob>
-  | string
-  | number
-  | boolean
-  | Blob
+    Array<number | string | boolean | Blob>
+    | string
+    | number
+    | boolean
+    | Blob
 
 export type RequestData = { [key: string]: RequestDataValue }
 

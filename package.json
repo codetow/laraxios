@@ -2,10 +2,10 @@
   "name": "laraxios",
   "version": "1.0.0",
   "description": "Axios wrapper for Laravel API",
-  "source": "src/laraxios.ts",
-  "main": "dist/laraxios.js",
-  "module": "dist/module.js",
-  "types": "dist/types.d.ts",
+  "source": "./src/index.ts",
+  "main": "./dist/laraxios.js",
+  "module": "./dist/module.js",
+  "types": "./dist/types.d.ts",
   "targets": {
     "main": {
       "isLibrary": true

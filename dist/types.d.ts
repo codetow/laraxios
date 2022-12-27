@@ -1,12 +1,19 @@
-import { AxiosError, AxiosRequestConfig, AxiosStatic } from "axios";
-interface LaraxiosRequestConfig extends AxiosRequestConfig {
+import { AxiosError, AxiosRequestConfig, AxiosResponse, AxiosStatic } from "axios";
+export interface LaraxiosRequestConfig extends AxiosRequestConfig {
     errorHandler?: undefined | ErrorHandlerCallback;
 }
-type RequestDataValue = Array<number | string | boolean | Blob> | string | number | boolean | Blob;
-type RequestData = {
+export interface LaraxiosResponse<T = any, D = any> extends AxiosResponse {
+}
+export type RequestDataValue = Array<number | string | boolean | Blob> | string | number | boolean | Blob;
+export type RequestData = {
     [key: string]: RequestDataValue;
 };
-interface ErrorHandlerCallback {
+export enum LaravelMethod {
+    GET = "get",
+    POST = "post",
+    DELETE = "delete"
+}
+export interface ErrorHandlerCallback {
     (error: AxiosError<any>): void;
 }
 declare const _default: (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => {
@@ -53,6 +60,6 @@ declare const _default: (axios: AxiosStatic, configuration?: LaraxiosRequestConf
         csrf(url?: string): Promise<import("types").LaraxiosResponse<any, any>>;
     };
 };
-export default _default;
+export default laraxios;
 
 //# sourceMappingURL=types.d.ts.map

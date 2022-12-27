@@ -7,7 +7,7 @@ function $parcel$export(e, n, v, s) {
 
 $parcel$defineInteropFlag(module.exports);
 
-$parcel$export(module.exports, "default", () => $19cba8869f611cea$export$2e2bcd8739ae039);
+$parcel$export(module.exports, "default", () => $882b6d93070905b3$export$2e2bcd8739ae039);
 let $faefaad95e5fcca0$export$440ca1817514db88;
 (function(LaravelMethod) {
     LaravelMethod["GET"] = "get";
@@ -205,6 +205,9 @@ var $19cba8869f611cea$export$2e2bcd8739ae039 = (axios, configuration)=>({
             }
         }
     });
+
+
+var $882b6d93070905b3$export$2e2bcd8739ae039 = (0, $19cba8869f611cea$export$2e2bcd8739ae039);
 
 
 //# sourceMappingURL=laraxios.js.map

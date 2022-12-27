@@ -1,4 +1,4 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 export interface LaraxiosRequestConfig extends AxiosRequestConfig {
   errorHandler?: undefined | ErrorHandlerCallback
@@ -24,4 +24,34 @@ export enum LaravelMethod {
 
 export interface ErrorHandlerCallback {
   (error: AxiosError<any>): void
+}
+
+export interface LaraxiosInstance {
+  get(url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
+
+  patch(
+      url: string,
+      data?: RequestData,
+      config?: LaraxiosRequestConfig
+  ): Promise<LaraxiosResponse>;
+
+  request(config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
+
+  axiosInstance: AxiosInstance;
+
+  post(
+      url: string,
+      data?: RequestData,
+      config?: LaraxiosRequestConfig
+  ): Promise<LaraxiosResponse>;
+
+  sanctum: { csrf(url?: string): Promise<LaraxiosResponse> };
+
+  delete(url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
+
+  put(
+      url: string,
+      data?: RequestData,
+      config?: LaraxiosRequestConfig
+  ): Promise<LaraxiosResponse>;
 }

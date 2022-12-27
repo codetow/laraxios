@@ -1,8 +1,8 @@
-import { LaraxiosRequestConfig, RequestData } from './types'
+import { LaraxiosInstance, LaraxiosRequestConfig, RequestData } from './types'
 import laraxiosRequest from './request'
 import { AxiosStatic } from 'axios'
 
-export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => ({
+export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig): LaraxiosInstance => ({
   axiosInstance: axios.create({
     withCredentials: true,
     headers: {

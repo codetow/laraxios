@@ -1,5 +1,6 @@
 import laraxios from './laraxios'
 import {
+    LaraxiosInstance,
     LaraxiosResponse,
     LaraxiosRequestConfig,
     RequestData,
@@ -9,6 +10,7 @@ import {
 } from './types'
 
 export type {
+    LaraxiosInstance,
     LaraxiosRequestConfig,
     LaraxiosResponse,
     RequestData,

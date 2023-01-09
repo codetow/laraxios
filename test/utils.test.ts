@@ -52,12 +52,12 @@ describe('Utils Suite', function () {
   })
 
   test('prepare request options', () => {
-    let o = requestFormatter
+    const o = requestFormatter
 
     expect(o({
       url: 'test',
       headers: {
-        'Authorization': 'Bearer 1'
+        Authorization: 'Bearer 1'
       }
     })).toStrictEqual({
       method: 'get',
@@ -65,7 +65,7 @@ describe('Utils Suite', function () {
       params: {},
       data: {},
       headers: {
-        'Authorization': 'Bearer 1'
+        Authorization: 'Bearer 1'
       }
     })
     // DELETE

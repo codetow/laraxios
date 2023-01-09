@@ -1,11 +1,14 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
+export interface ErrorHandlerCallback<T = unknown, D = any> {
+  (error: AxiosError<T, D>): void
+}
+
 export interface LaraxiosRequestConfig extends AxiosRequestConfig {
   errorHandler?: undefined | ErrorHandlerCallback
 }
 
-export interface LaraxiosResponse<T = any, D = any> extends AxiosResponse {
-}
+export type LaraxiosResponse<T = any, D = any> = AxiosResponse<T, D>
 
 export type RequestDataValue =
     Array<number | string | boolean | Blob>
@@ -24,10 +27,6 @@ export enum LaravelMethod {
   GET = 'get',
   POST = 'post',
   DELETE = 'delete'
-}
-
-export interface ErrorHandlerCallback {
-  (error: AxiosError<any>): void
 }
 
 export interface LaraxiosInstance {

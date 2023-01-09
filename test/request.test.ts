@@ -34,14 +34,14 @@ describe('Request Test', () => {
         data: {},
         params: {
           id: 1
-        },
+        }
       })
   })
 
   test('sends a post request', async () => {
     const options = {
       url: 'user',
-      method: 'post',
+      method: 'post'
     }
 
     await request(axios, mockedAxiosInstance, options)
@@ -50,14 +50,14 @@ describe('Request Test', () => {
         method: 'post',
         url: 'user',
         data: {},
-        params: {},
+        params: {}
       })
   })
 
   test('sends a put request', async () => {
     const options = {
       url: 'user',
-      method: 'put',
+      method: 'put'
     }
 
     await request(axios, mockedAxiosInstance, options)
@@ -68,7 +68,7 @@ describe('Request Test', () => {
         data: {
           _method: 'put'
         },
-        params: {},
+        params: {}
       })
   })
 
@@ -95,7 +95,7 @@ describe('Request Test', () => {
         }
       },
       name: '',
-      message: '',
+      message: ''
     }
     mockedAxiosInstance.request.mockRejectedValueOnce(error)
 

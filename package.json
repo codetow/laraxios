@@ -35,6 +35,7 @@
     "watch": "parcel watch",
     "clean": "npx rimraf dist/*",
     "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "build": "npm run clean && standard --fix && parcel build",
     "test": "jest",
     "test:watch": "jest --watch",

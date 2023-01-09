@@ -1,6 +1,7 @@
 .idea
 .cache/
 .parcel-cache
+dist/
 coverage/
 node_modules/
 *.log

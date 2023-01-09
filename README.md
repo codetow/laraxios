@@ -1,3 +1,7 @@
+![npm](https://img.shields.io/npm/v/laraxios?style=for-the-badge)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/codetow/laraxios?style=for-the-badge)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/laraxios?style=for-the-badge)
+
 # Axios wrapper for Laravel API
 
 Work in progress...

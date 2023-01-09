@@ -1,4 +1,4 @@
-import { LaravelMethod, LaraxiosRequestConfig, RequestData, RequestDataValue, } from './types'
+import { FormattedData, LaravelMethod, LaraxiosRequestConfig, RequestData, RequestDataValue, } from './types'
 import { AxiosRequestConfig } from 'axios'
 
 /**
@@ -8,7 +8,7 @@ import { AxiosRequestConfig } from 'axios'
 export const formatURL = (config: LaraxiosRequestConfig): string | undefined => {
   const baseURL = config.baseURL?.trim()
   if (baseURL?.length && config.url && config.url[0] === '/') {
-    const { origin } = new URL(baseURL)
+    const {origin} = new URL(baseURL)
     return `${origin}`
   }
 
@@ -19,7 +19,7 @@ export const formatURL = (config: LaraxiosRequestConfig): string | undefined => 
  * Convert regular values to acceptable FormData values.
  * @param data
  */
-export const convertToFormData = (data: RequestData | undefined): FormData => {
+export const dataAdapter = (data: RequestData | undefined): FormattedData => {
   /**
    * Change the type of data.
    * @param val
@@ -34,23 +34,23 @@ export const convertToFormData = (data: RequestData | undefined): FormData => {
     }
   }
 
-  const formData = new FormData()
+  const formattedData = {}
 
   if (data) {
     Object.entries(data)
-      .forEach(([key, value]) => {
-        // Iterate if array
-        if (Array.isArray(value)) {
-          value.forEach((val, index) => {
-            formData.append(`${key}[${index}]`, changeType(val))
-          })
-        } else {
-          formData.append(key, changeType(value))
-        }
-      })
+        .forEach(([key, value]) => {
+          // Iterate if array
+          if (Array.isArray(value)) {
+            value.forEach((val, index) => {
+              Object.assign(formattedData, {[`${key}[${index}]`]: changeType(val)})
+            })
+          } else {
+            Object.assign(formattedData, {[key]: changeType(value)})
+          }
+        })
   }
 
-  return formData
+  return formattedData
 }
 
 /**
@@ -62,13 +62,14 @@ export const requestFormatter = (config: LaraxiosRequestConfig): AxiosRequestCon
   let method = LaravelMethod.GET
   // Set data according to the method...
   if (config.method === 'post' || config.method === 'put' || config.method === 'patch') {
-    const formData = convertToFormData(config.data)
     // Laravel uses this field to recognize put and patch...
-    formData.append('_method', config.method)
-    data = formData
+    if (config.method !== 'post') {
+      Object.assign(data, {'_method': config.method})
+    }
+    Object.assign(data, dataAdapter(config.data))
     method = LaravelMethod.POST
   } else if (config.method === 'delete') {
-    data = {}
+    Object.assign(data, {'_method': 'delete'})
     method = LaravelMethod.DELETE
   }
 
@@ -88,15 +89,17 @@ export const requestFormatter = (config: LaraxiosRequestConfig): AxiosRequestCon
   return newConfig
 }
 
+const laraxiosConfig = {
+  errorHandler: (error) => console.error('LARAVEL API ERROR: ' + (error?.response?.statusText || 'Unknown')),
+}
+
 /**
  * Merge default configs with user configs.
  * @param config
  */
 export const mergeConfig = (config: LaraxiosRequestConfig): LaraxiosRequestConfig => {
   return {
-    ...{
-      errorHandler: (error) => console.error('LARAVEL API ERROR: ' + (error?.response?.statusText || 'Unknown')),
-    },
+    ...laraxiosConfig,
     ...config
   }
 }

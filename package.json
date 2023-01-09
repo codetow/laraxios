@@ -35,7 +35,8 @@
     "watch": "parcel watch",
     "clean": "npx rimraf dist/*",
     "build": "yarn clean && parcel build",
-    "test": "yarn jest"
+    "test": "yarn jest",
+    "test:watch": "yarn jest --watch"
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.8.1",

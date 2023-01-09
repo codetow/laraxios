@@ -18,6 +18,42 @@ describe('Request Test', () => {
     jest.clearAllMocks()
   })
 
+  test('sends a get request', async () => {
+    const options = {
+      url: 'user',
+      params: {
+        id: 1
+      }
+    }
+
+    await request(axios, mockedAxiosInstance, options)
+    expect(mockedAxiosInstance.request)
+      .toBeCalledWith({
+        method: 'get',
+        url: 'user',
+        data: {},
+        params: {
+          id: 1
+        },
+      })
+  })
+
+  test('sends a post request', async () => {
+    const options = {
+      url: 'user',
+      method: 'post',
+    }
+
+    await request(axios, mockedAxiosInstance, options)
+    expect(mockedAxiosInstance.request)
+      .toBeCalledWith({
+        method: 'post',
+        url: 'user',
+        data: {},
+        params: {},
+      })
+  })
+
   test('sends a put request', async () => {
     const options = {
       url: 'user',
@@ -25,13 +61,13 @@ describe('Request Test', () => {
     }
 
     await request(axios, mockedAxiosInstance, options)
-    const data = new FormData()
-    data.append('_method', 'put')
     expect(mockedAxiosInstance.request)
       .toBeCalledWith({
         method: 'post',
         url: 'user',
-        data,
+        data: {
+          _method: 'put'
+        },
         params: {},
       })
   })

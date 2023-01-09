@@ -1,7 +1,7 @@
-import { convertToFormData, formatURL, requestFormatter } from '../src/utils'
+import { dataAdapter, formatURL, requestFormatter } from '../src/utils'
 
 describe('Utils Suite', function () {
-  test('format url', () => {
+  test('formatting url', () => {
     const fu = formatURL
     expect(fu({
       baseURL: 'https://sub.example.com/',
@@ -29,25 +29,25 @@ describe('Utils Suite', function () {
     }))
       .toStrictEqual('https://localhost:8000')
   })
-  test('convert regular data to FormData', () => {
-    const fd = convertToFormData({
+  test('formatting data', () => {
+    const fd = dataAdapter({
       foo: 1,
       bar: [1, 2, true],
       baz: false,
       qux: new Blob(['SomeBlobData'])
     })
 
-    expect(fd.get('foo'))
+    expect(fd.foo)
       .toStrictEqual('1')
-    expect(fd.get('bar[0]'))
+    expect(fd['bar[0]'])
       .toStrictEqual('1')
-    expect(fd.get('bar[1]'))
+    expect(fd['bar[1]'])
       .toStrictEqual('2')
-    expect(fd.get('bar[2]'))
+    expect(fd['bar[2]'])
       .toStrictEqual('1')
-    expect(fd.get('baz'))
+    expect(fd.baz)
       .toStrictEqual('0')
-    expect(fd.get('qux'))
+    expect(fd.qux)
       .toBeInstanceOf(Blob)
   })
 
@@ -82,7 +82,9 @@ describe('Utils Suite', function () {
       params: {
         foo: true
       },
-      data: {}
+      data: {
+        _method: 'delete'
+      }
     })
     // PUT/PATCH
     const ro = o({
@@ -94,10 +96,5 @@ describe('Utils Suite', function () {
     })
     expect(ro.url).toStrictEqual('test')
     expect(ro.method).toStrictEqual('post')
-    expect(ro.data).toBeInstanceOf(FormData)
-    if (ro.data instanceof FormData) {
-      expect(ro.data.get('_method')).toStrictEqual('put')
-      expect(ro.data.get('bar')).toStrictEqual('2')
-    }
   })
 })

@@ -16,6 +16,10 @@ export type RequestDataValue =
 
 export type RequestData = { [key: string]: RequestDataValue }
 
+export interface FormattedData {
+  [key: string]: string | Blob
+}
+
 export enum LaravelMethod {
   GET = 'get',
   POST = 'post',

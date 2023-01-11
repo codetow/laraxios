@@ -1,4 +1,4 @@
-import { dataAdapter, formatURL, requestFormatter } from '../src/utils'
+import { payloadAdapter, formatURL, requestFormatter } from '../src/utils'
 
 describe('Utils Suite', function () {
   test('formatting url', () => {
@@ -40,7 +40,7 @@ describe('Utils Suite', function () {
       .toStrictEqual('https://localhost:8000')
   })
   test('formatting data', () => {
-    const fd = dataAdapter({
+    const fd = payloadAdapter({
       foo: 1,
       bar: [1, 2, true],
       baz: false,

@@ -11,17 +11,16 @@ export interface LaraxiosRequestConfig extends AxiosRequestConfig {
 export type LaraxiosResponse<T = any, D = any> = AxiosResponse<T, D>
 
 export type RequestDataValue =
-    Array<number | string | boolean | Blob>
-    | string
-    | number
-    | boolean
-    | Blob
+  Array<number | string | boolean | Blob | File>
+  | string
+  | number
+  | boolean
+  | Blob
+  | File
 
 export type RequestData = { [key: string]: RequestDataValue }
 
-export interface FormattedData {
-  [key: string]: string | Blob
-}
+export type FormattedData = { [key: string]: string | Blob | File }
 
 export enum LaravelMethod {
   GET = 'get',
@@ -30,31 +29,31 @@ export enum LaravelMethod {
 }
 
 export interface LaraxiosInstance {
-  get(url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
+  get (url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
 
-  patch(
-      url: string,
-      data?: RequestData,
-      config?: LaraxiosRequestConfig
+  patch (
+    url: string,
+    data?: RequestData,
+    config?: LaraxiosRequestConfig
   ): Promise<LaraxiosResponse>;
 
-  request(config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
+  request (config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
 
   axiosInstance: AxiosInstance;
 
-  post(
-      url: string,
-      data?: RequestData,
-      config?: LaraxiosRequestConfig
+  post (
+    url: string,
+    data?: RequestData,
+    config?: LaraxiosRequestConfig
   ): Promise<LaraxiosResponse>;
 
-  sanctum: { csrf(url?: string): Promise<LaraxiosResponse> };
+  sanctum: { csrf (url?: string): Promise<LaraxiosResponse> };
 
-  delete(url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
+  delete (url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
 
-  put(
-      url: string,
-      data?: RequestData,
-      config?: LaraxiosRequestConfig
+  put (
+    url: string,
+    data?: RequestData,
+    config?: LaraxiosRequestConfig
   ): Promise<LaraxiosResponse>;
 }

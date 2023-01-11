@@ -19,7 +19,7 @@ export const formatURL = (config: LaraxiosRequestConfig): string | undefined => 
  * Convert regular values to acceptable FormData values.
  * @param data
  */
-export const dataAdapter = (data: RequestData | undefined): FormattedData => {
+export const payloadAdapter = (data: RequestData | undefined): FormattedData => {
   /**
    * Change the type of data.
    * @param val
@@ -39,10 +39,17 @@ export const dataAdapter = (data: RequestData | undefined): FormattedData => {
   if (data) {
     Object.entries(data)
       .forEach(([key, value]) => {
-        // Iterate if array
+        if (value instanceof File || value instanceof Blob) {
+          Object.assign(formattedData, { [key]: value })
+        }
         if (Array.isArray(value)) {
           value.forEach((val, index) => {
             Object.assign(formattedData, { [`${key}[${index}]`]: changeType(val) })
+          })
+        } else if (typeof value === 'object' && value !== null) {
+          Object.keys(value).forEach((k) => {
+            const valueKeyed = value ? value[k] : ''
+            Object.assign(formattedData, { [`${key}[${k}]`]: changeType(valueKeyed) })
           })
         } else {
           Object.assign(formattedData, { [key]: changeType(value) })
@@ -58,15 +65,21 @@ export const dataAdapter = (data: RequestData | undefined): FormattedData => {
  * @param config
  */
 export const requestFormatter = (config: LaraxiosRequestConfig): AxiosRequestConfig => {
-  const data = {}
+  let data: object | FormData = {}
   let method = LaravelMethod.GET
   // Set data according to the method...
   if (config.method === 'post' || config.method === 'put' || config.method === 'patch') {
-    // Laravel uses this field to recognize put and patch...
-    if (config.method !== 'post') {
-      Object.assign(data, { _method: config.method })
+    if (config.data instanceof FormData) {
+      data = config.data
+      if (config.method !== 'post' && data instanceof FormData) {
+        data.append('_method', config.method)
+      }
+    } else {
+      if (config.method !== 'post') {
+        Object.assign(data, { _method: config.method })
+      }
+      Object.assign(data, payloadAdapter(config.data))
     }
-    Object.assign(data, dataAdapter(config.data))
     method = LaravelMethod.POST
   } else if (config.method === 'delete') {
     Object.assign(data, { _method: 'delete' })

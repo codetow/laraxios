@@ -8,21 +8,31 @@ describe('Utils Suite', function () {
       url: undefined
     }))
       .toStrictEqual('https://sub.example.com/')
+
     expect(fu({
       baseURL: 'https://sub.example.com/',
       url: 'foo/bar'
     }))
       .toStrictEqual('https://sub.example.com/')
+
     expect(fu({
       baseURL: 'https://sub.example.com/api/v1',
       url: '/foo/bar'
     }))
       .toStrictEqual('https://sub.example.com')
+
+    expect(fu({
+      baseURL: 'https://sub.example.com/api/v1',
+      url: 'foo/bar'
+    }))
+      .toStrictEqual('https://sub.example.com/api/v1')
+
     expect(fu({
       baseURL: 'https://localhost:8000/api/v1',
       url: '/foo/bar'
     }))
       .toStrictEqual('https://localhost:8000')
+
     expect(fu({
       baseURL: ' https://localhost:8000/api/v1 ',
       url: '/foo/bar'

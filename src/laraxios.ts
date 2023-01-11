@@ -102,9 +102,8 @@ export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig): Lara
       if (url) {
         return request({ ...configuration, baseURL: '', url })
       }
-      if (configuration?.baseURL) {
-        return request({ ...configuration, url: '/sanctum/csrf-cookie' })
-      }
+
+      return request({ ...configuration, url: '/sanctum/csrf-cookie' })
     }
   }
 

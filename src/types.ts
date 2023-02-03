@@ -1,4 +1,4 @@
-import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic } from 'axios'
 
 export interface ErrorHandlerCallback<T = unknown, D = any> {
   (error: AxiosError<T, D>): void
@@ -9,6 +9,10 @@ export interface LaraxiosRequestConfig extends AxiosRequestConfig {
 }
 
 export type LaraxiosResponse<T = any, D = any> = AxiosResponse<T, D>
+
+export interface LaraxiosRequest<T = any, D = any> {
+  (axios: AxiosStatic, axiosInstance: AxiosInstance, config: LaraxiosRequestConfig): Promise<LaraxiosResponse<T, D>>
+}
 
 export type RequestDataValue =
   Array<number | string | boolean | Blob | File>
@@ -28,32 +32,38 @@ export enum LaravelMethod {
   DELETE = 'delete'
 }
 
-export interface LaraxiosInstance {
-  get (url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
+export interface GetRequest {
+  <T = any, D = any> (url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse<T, D>>;
+}
 
-  patch (
+export interface PostRequest {
+  <T = any, D = any> (
     url: string,
     data?: RequestData,
     config?: LaraxiosRequestConfig
-  ): Promise<LaraxiosResponse>;
+  ): Promise<LaraxiosResponse<T, D>>;
+}
+
+export type DeleteRequest = GetRequest
+export type PatchRequest = PostRequest
+export type PutRequest = PostRequest
+
+interface LaraxiosInstance {
+  get: GetRequest;
+
+  patch: PatchRequest;
 
   request (config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
 
   axiosInstance: AxiosInstance;
 
-  post (
-    url: string,
-    data?: RequestData,
-    config?: LaraxiosRequestConfig
-  ): Promise<LaraxiosResponse>;
+  post: PostRequest;
 
   sanctum: { csrf (url?: string): Promise<LaraxiosResponse> };
 
-  delete (url: string, config?: LaraxiosRequestConfig): Promise<LaraxiosResponse>;
+  delete: DeleteRequest;
 
-  put (
-    url: string,
-    data?: RequestData,
-    config?: LaraxiosRequestConfig
-  ): Promise<LaraxiosResponse>;
+  put: PutRequest;
 }
+
+export default LaraxiosInstance

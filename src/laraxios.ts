@@ -1,4 +1,4 @@
-import { LaraxiosInstance, LaraxiosRequestConfig, RequestData } from './types'
+import LaraxiosInstance, { LaraxiosRequestConfig, RequestData } from './types'
 import laraxiosRequest from './request'
 import { AxiosStatic } from 'axios'
 

@@ -81,8 +81,7 @@ describe('Request Test', () => {
       method: 'get' as Method,
       errorHandler: mockedErrorHandler
     }
-    const error: AxiosError = {
-      config: {},
+    const error: any = {
       isAxiosError: true,
       toJSON: () => ({}),
       response: {

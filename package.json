@@ -38,7 +38,7 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "build": "npm run clean && standard --fix && parcel build",
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage"
   },
   "devDependencies": {

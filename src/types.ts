@@ -48,7 +48,7 @@ export type DeleteRequest = GetRequest
 export type PatchRequest = PostRequest
 export type PutRequest = PostRequest
 
-interface LaraxiosInstance {
+export interface LaraxiosInstance {
   get: GetRequest;
 
   patch: PatchRequest;
@@ -65,5 +65,3 @@ interface LaraxiosInstance {
 
   put: PutRequest;
 }
-
-export default LaraxiosInstance

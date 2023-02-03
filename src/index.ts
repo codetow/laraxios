@@ -1,5 +1,6 @@
 import laraxios from './laraxios'
-import LaraxiosInstance, {
+import {
+  LaraxiosInstance,
   LaraxiosResponse,
   LaraxiosRequestConfig,
   RequestData,

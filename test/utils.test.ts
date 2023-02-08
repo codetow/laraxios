@@ -42,19 +42,15 @@ describe('Utils Suite', function () {
   test('formatting data', () => {
     const fd = payloadAdapter({
       foo: 1,
-      bar: [1, 2, true],
+      bar: [1, 2, true, false],
       baz: false,
       qux: new Blob(['SomeBlobData'])
     })
 
     expect(fd.foo)
-      .toStrictEqual('1')
-    expect(fd['bar[0]'])
-      .toStrictEqual('1')
-    expect(fd['bar[1]'])
-      .toStrictEqual('2')
-    expect(fd['bar[2]'])
-      .toStrictEqual('1')
+      .toStrictEqual(1)
+    expect(fd.bar)
+      .toStrictEqual([1, 2, '1', '0'])
     expect(fd.baz)
       .toStrictEqual('0')
     expect(fd.qux)

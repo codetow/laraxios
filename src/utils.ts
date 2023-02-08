@@ -30,7 +30,7 @@ export const payloadAdapter = (data: RequestData | undefined): FormattedData => 
     } else if (typeof val === 'boolean') {
       return val ? '1' : '0'
     } else {
-      return `${val}`
+      return val
     }
   }
 
@@ -43,14 +43,12 @@ export const payloadAdapter = (data: RequestData | undefined): FormattedData => 
           Object.assign(formattedData, { [key]: value })
         }
         if (Array.isArray(value)) {
-          value.forEach((val, index) => {
-            Object.assign(formattedData, { [`${key}[${index}]`]: changeType(val) })
-          })
-        } else if (typeof value === 'object' && value !== null) {
-          Object.keys(value).forEach((k) => {
-            const valueKeyed = value ? value[k] : ''
-            Object.assign(formattedData, { [`${key}[${k}]`]: changeType(valueKeyed) })
-          })
+          Object.assign(formattedData, { [key]: value.map(changeType) })
+          // } else if (typeof value === 'object' && value !== null) {
+          //   Object.keys(value).forEach((k) => {
+          //     const valueKeyed = value ? value[k] : ''
+          //     Object.assign(formattedData, { [`${key}[${k}]`]: changeType(valueKeyed) })
+          //   })
         } else {
           Object.assign(formattedData, { [key]: changeType(value) })
         }

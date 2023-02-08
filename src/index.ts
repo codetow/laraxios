@@ -1,4 +1,5 @@
 import laraxios from './laraxios'
+import { AxiosStatic } from 'axios'
 import {
   LaraxiosInstance,
   LaraxiosResponse,
@@ -19,4 +20,4 @@ export type {
   ErrorHandlerCallback
 }
 
-export default laraxios
+export default laraxios as (axios: AxiosStatic, configuration?: LaraxiosRequestConfig) => LaraxiosInstance

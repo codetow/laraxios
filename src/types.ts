@@ -1,6 +1,6 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic } from 'axios'
 
-export interface ErrorHandlerCallback<T = unknown, D = any> {
+export interface ErrorHandlerCallback<T = any, D = any> {
   (error: AxiosError<T, D>): void
 }
 

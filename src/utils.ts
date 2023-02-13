@@ -81,7 +81,7 @@ export const requestFormatter = (config: LaraxiosRequestConfig): AxiosRequestCon
     method = LaravelMethod.POST
   } else if (config.method === 'delete') {
     Object.assign(data, { _method: 'delete' })
-    method = LaravelMethod.GET
+    method = LaravelMethod.POST
   }
 
   const newConfig = {

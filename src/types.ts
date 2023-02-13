@@ -28,8 +28,7 @@ export type FormattedData = { [key: string]: string | Blob | File }
 
 export enum LaravelMethod {
   GET = 'get',
-  POST = 'post',
-  DELETE = 'delete'
+  POST = 'post'
 }
 
 export interface GetRequest {

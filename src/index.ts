@@ -1,4 +1,4 @@
-import laraxios from './laraxios'
+import { laraxios } from './laraxios'
 import { AxiosStatic } from 'axios'
 import {
   LaraxiosInstance,

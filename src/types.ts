@@ -1,11 +1,11 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic } from 'axios'
 
 export interface ErrorHandlerCallback<T = any, D = any> {
-  (error: AxiosError<T, D>): void
+  (error: AxiosError<T, D>): Promise<AxiosResponse>
 }
 
 export interface LaraxiosRequestConfig extends AxiosRequestConfig {
-  errorHandler?: undefined | ErrorHandlerCallback
+  errorHandler?: ErrorHandlerCallback
 }
 
 export type LaraxiosResponse<T = any, D = any> = AxiosResponse<T, D>

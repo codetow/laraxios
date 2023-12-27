@@ -22,10 +22,7 @@ const request: LaraxiosRequest =
     } catch (error) {
       if (axios.isAxiosError(error) && error.response && errorHandler) {
         // Invoke error handler...
-        errorHandler(error)
-
-        // Resolve with error, since the error has been handled...
-        return Promise.resolve(error.response)
+        return errorHandler(error)
       }
 
       return Promise.reject(error)

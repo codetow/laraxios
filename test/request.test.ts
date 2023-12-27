@@ -1,5 +1,6 @@
 import request from '../src/request'
-import axios, { AxiosError, Method } from 'axios'
+import axios, { Method } from 'axios'
+
 const axiosInstance = axios.create({
   withCredentials: true,
   headers: {
@@ -98,13 +99,12 @@ describe('Request Test', () => {
     }
     mockedAxiosInstance.request.mockRejectedValueOnce(error)
 
-    const errorResponse = await request(axios, mockedAxiosInstance, options)
+    await request(axios, mockedAxiosInstance, options)
 
-    expect(errorResponse)
-      .toEqual(error.response)
     expect(mockedErrorHandler)
       .toBeCalled()
-    // .toBeCalledWith(error.response)
+    expect(mockedErrorHandler)
+      .toBeCalledWith(error)
   })
 
   test('fail request without axios error', async () => {

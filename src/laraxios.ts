@@ -2,7 +2,7 @@ import { LaraxiosInstance, LaraxiosRequestConfig, RequestData } from './types'
 import laraxiosRequest from './request'
 import { AxiosStatic } from 'axios'
 
-export default (axios: AxiosStatic, configuration?: LaraxiosRequestConfig): LaraxiosInstance => {
+export function laraxios (axios: AxiosStatic, configuration?: LaraxiosRequestConfig): LaraxiosInstance {
   /**
    * Axios instance.
    */

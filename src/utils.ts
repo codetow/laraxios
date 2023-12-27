@@ -1,5 +1,5 @@
 import { FormattedData, LaravelMethod, LaraxiosRequestConfig, RequestData, RequestDataValue } from './types'
-import { AxiosRequestConfig } from 'axios'
+import { AxiosError, AxiosRequestConfig } from 'axios'
 
 /**
  * Define baseURL for api based on a slash character as a first character.
@@ -30,7 +30,7 @@ export const payloadAdapter = (data: RequestData | undefined): FormattedData => 
     } else if (typeof val === 'boolean') {
       return val ? '1' : '0'
     } else {
-      return `${val}`
+      return val
     }
   }
 
@@ -43,14 +43,12 @@ export const payloadAdapter = (data: RequestData | undefined): FormattedData => 
           Object.assign(formattedData, { [key]: value })
         }
         if (Array.isArray(value)) {
-          value.forEach((val, index) => {
-            Object.assign(formattedData, { [`${key}[${index}]`]: changeType(val) })
-          })
-        } else if (typeof value === 'object' && value !== null) {
-          Object.keys(value).forEach((k) => {
-            const valueKeyed = value ? value[k] : ''
-            Object.assign(formattedData, { [`${key}[${k}]`]: changeType(valueKeyed) })
-          })
+          Object.assign(formattedData, { [key]: value.map(changeType) })
+          // } else if (typeof value === 'object' && value !== null) {
+          //   Object.keys(value).forEach((k) => {
+          //     const valueKeyed = value ? value[k] : ''
+          //     Object.assign(formattedData, { [`${key}[${k}]`]: changeType(valueKeyed) })
+          //   })
         } else {
           Object.assign(formattedData, { [key]: changeType(value) })
         }
@@ -83,7 +81,7 @@ export const requestFormatter = (config: LaraxiosRequestConfig): AxiosRequestCon
     method = LaravelMethod.POST
   } else if (config.method === 'delete') {
     Object.assign(data, { _method: 'delete' })
-    method = LaravelMethod.DELETE
+    method = LaravelMethod.POST
   }
 
   const newConfig = {
@@ -103,7 +101,7 @@ export const requestFormatter = (config: LaraxiosRequestConfig): AxiosRequestCon
 }
 
 const laraxiosConfig = {
-  errorHandler: (error) => console.error('LARAVEL API ERROR: ' + (error?.response?.statusText || 'Unknown'))
+  errorHandler: (error: AxiosError) => Promise.reject(error)
 }
 
 /**

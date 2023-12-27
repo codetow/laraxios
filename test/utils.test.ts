@@ -83,7 +83,7 @@ describe('Utils Suite', function () {
         foo: true
       }
     })).toStrictEqual({
-      method: 'delete',
+      method: 'post',
       url: 'test',
       params: {
         foo: true

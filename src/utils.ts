@@ -1,5 +1,5 @@
 import { FormattedData, LaravelMethod, LaraxiosRequestConfig, RequestData, RequestDataValue } from './types'
-import { AxiosRequestConfig } from 'axios'
+import { AxiosError, AxiosRequestConfig } from 'axios'
 
 /**
  * Define baseURL for api based on a slash character as a first character.
@@ -101,7 +101,7 @@ export const requestFormatter = (config: LaraxiosRequestConfig): AxiosRequestCon
 }
 
 const laraxiosConfig = {
-  errorHandler: (error) => console.error('LARAVEL API ERROR: ' + (error?.response?.statusText || 'Unknown'))
+  errorHandler: (error: AxiosError) => Promise.reject(error)
 }
 
 /**

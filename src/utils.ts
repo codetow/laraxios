@@ -44,11 +44,11 @@ export const payloadAdapter = (data: RequestData | undefined): FormattedData => 
         }
         if (Array.isArray(value)) {
           Object.assign(formattedData, { [key]: value.map(changeType) })
-          // } else if (typeof value === 'object' && value !== null) {
-          //   Object.keys(value).forEach((k) => {
-          //     const valueKeyed = value ? value[k] : ''
-          //     Object.assign(formattedData, { [`${key}[${k}]`]: changeType(valueKeyed) })
-          //   })
+        } else if (typeof value === 'object' && value !== null) {
+          Object.keys(value).forEach((k) => {
+            const valueKeyed = value ? value[k] : ''
+            Object.assign(formattedData, { [`${key}[${k}]`]: changeType(valueKeyed) })
+          })
         } else {
           Object.assign(formattedData, { [key]: changeType(value) })
         }

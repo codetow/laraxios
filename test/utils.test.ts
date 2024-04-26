@@ -44,7 +44,10 @@ describe('Utils Suite', function () {
       foo: 1,
       bar: [1, 2, true, false],
       baz: false,
-      qux: new Blob(['SomeBlobData'])
+      qux: new Blob(['SomeBlobData']),
+      cord: {
+        plug: 1
+      }
     })
 
     expect(fd.foo)
@@ -55,6 +58,8 @@ describe('Utils Suite', function () {
       .toStrictEqual('0')
     expect(fd.qux)
       .toBeInstanceOf(Blob)
+    expect(fd['cord[plug]'])
+      .toStrictEqual(1)
   })
 
   test('prepare request options', () => {

@@ -19,6 +19,7 @@ export type RequestDataValue =
   | string
   | number
   | boolean
+  | object
   | Blob
   | File
 
